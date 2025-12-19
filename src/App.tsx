@@ -1,7 +1,9 @@
-import AppRoutes from "./routes";
-
 const App = () => {
-  return <AppRoutes />;
-};
+  return (
+    <div className="min-h-screen px-8 py-4 bg-white">
+      <MainLayout />
+    </div>
+  )
+}
 
-export default App;
+export default App
