@@ -44,31 +44,37 @@ const AppointemntCard = () => {
       day_name: "Monday",
     },
     {
-      date: "2025-12-23",
+      date: "2025-12-22",
       start_time: "09:30",
       end_time: "10:00",
-      day_name: "Tuesday",
+      day_name: "Monday",
     },
     {
-      date: "2025-12-24",
+      date: "2025-12-22",
       start_time: "10:00",
       end_time: "10:30",
-      day_name: "Wednesday",
+      day_name: "Monday",
     },
     {
-      date: "2025-12-25",
+      date: "2025-12-22",
       start_time: "10:30",
       end_time: "11:00",
-      day_name: "Thursday",
+      day_name: "Monday",
     },
     {
-      date: "2025-12-26",
+      date: "2025-12-22",
       start_time: "11:00",
       end_time: "11:30",
-      day_name: "Friday",
+      day_name: "Monday",
     },
     {
-      date: "2025-6-2",
+      date: "2025-12-23",
+      start_time: "11:00",
+      end_time: "11:30",
+      day_name: "Monday",
+    },
+    {
+      date: "2026-1-1",
       start_time: "11:00",
       end_time: "11:30",
       day_name: "Monday",
@@ -101,7 +107,7 @@ const AppointemntCard = () => {
     },
     {}
   );
-
+  // convert groupedData to array
   const finalDays: DayGroup[] = Object.values(groupedData);
 
   /* ================= States ================= */
