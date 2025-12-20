@@ -1,5 +1,11 @@
-const App = () => {
-  return <div></div>;
-};
+import MainLayout from "./components/layout/MainLayout"
 
-export default App;
+const App = () => {
+  return (
+    <div className="min-h-screen px-8 py-4 bg-white">
+      <MainLayout />
+    </div>
+  )
+}
+
+export default App

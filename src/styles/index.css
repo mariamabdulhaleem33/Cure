@@ -3,7 +3,7 @@
 
 @layer utilities {
   .home-container {
-    @apply mx-auto w-[97%] sm:w-[90%];
+    @apply mx-auto w-[97%] sm:w-[90%] mb-[32px] sm:mb-25;
     /* px-25 = px-[100px] (from figma) */
   }
   .section-heading {
@@ -13,8 +13,7 @@
     @apply font-[Montserrat] text-[16px] sm:text-[20px] text-[#6D7379] font-normal tracking-normal;
   }
   .card {
-    @apply   border border-gray-200 rounded-[24px];
-    
+    @apply border border-gray-200 rounded-[24px];
   }
 }
 
