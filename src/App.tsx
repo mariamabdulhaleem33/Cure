@@ -1,5 +1,6 @@
-const App = () => {
-  return <div className="bg-blue-500 text-white p-4">test tailwindcss</div>;
-};
+import YourAppointments from "./features/patient/pages/YourAppointments";
+function App(){
+  return<YourAppointments/>
+}
 
 export default App;
