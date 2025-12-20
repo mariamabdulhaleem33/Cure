@@ -31,9 +31,9 @@ export function DoctorCard({ doctor }: { doctor: Doctor }) {
       </div>
 
 
-      <Link to='/' className="mt-4 w-full rounded-xl bg-blue-600 py-2 text-white font-medium hover:bg-blue-700 transition">
+      <Link to='/'> <button className="mt-4 w-full rounded-xl bg-blue-600 py-2 text-white font-medium hover:bg-blue-700 transition">
         Book appointment
-      </Link>
+      </button> </Link>
     </div>
   );
 }
