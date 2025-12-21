@@ -5,7 +5,7 @@ import Logo from "@/components/layout/navbar/Logo"
 
 const SignUp = () => {
   return (
-    <div className="relative flex  min-h-screen">
+    <div className=" flex ">
       <div className="fixed top-2.5 left-15">
         <Logo />
       </div>

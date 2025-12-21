@@ -16,7 +16,7 @@ const OtpForm = () => {
         console.log(data)
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className=" w-76.25 mx-auto my-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-76.25 mx-auto ">
             <div className="space-y-2">
                 <Controller
                     name="otp"
