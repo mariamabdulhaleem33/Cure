@@ -5,7 +5,7 @@ import { store } from "@/store";
 import Navbar from "./navbar/Navbar";
 import HeroSection from "../home/hero/HeroSection";
 import Footer from "./footer/footer";
-
+import FooterAd from "./footer/FooterAd";
 const MainLayout: React.FC = () => {
   return (
     <Provider store={store}>
@@ -13,9 +13,10 @@ const MainLayout: React.FC = () => {
         <Navbar />
         <div className="flex-grow">
           <HeroSection />
-        </div>
+          </div>
+          <FooterAd/>
         <Footer />
-      </div>
+            </div>
     </Provider>
   );
 };
