@@ -1,15 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 @import "tailwindcss";
-@import "flowbite-react/plugin/tailwindcss";
-@source "../../.flowbite-react/class-list.json";
+
 @import "tw-animate-css";
-
-
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -50,8 +46,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Custom Font Families */
-  --font-family-montserrat: 'Montserrat', sans-serif;
-  --font-family-georgia: 'Georgia', serif;
+  --font-family-montserrat: "Montserrat", sans-serif;
+  --font-family-georgia: "Georgia", serif;
 
   /* Typography tokens (used by profile popup for now) */
   --font-size-button: 14px;
@@ -59,9 +55,8 @@
   --font-size-small-caption: 12px;
 
   /* Text colors for profile popup */
-  --color-text-secondary: #05162C;
-  --color-text-neutral-darker: #6D7379;
-
+  --color-text-secondary: #05162c;
+  --color-text-neutral-darker: #6d7379;
 }
 
 :root {
@@ -155,38 +150,38 @@
   .font-montserrat {
     font-family: var(--font-family-montserrat);
   }
-  
+
   .font-georgia {
     font-family: var(--font-family-georgia);
   }
-  
+
   .text-button {
     font-size: var(--font-size-button);
     line-height: 100%;
   }
-  
+
   .text-subheading {
     font-size: var(--font-size-subheading);
     line-height: 100%;
   }
-  
+
   .text-small-caption {
     font-size: var(--font-size-small-caption);
     line-height: 100%;
   }
-  
+
   .text-text-secondary {
-    color: #05162C;
+    color: #05162c;
   }
-  
+
   .text-text-neutral-darker {
-    color: #6D7379;
+    color: #6d7379;
   }
 }
 @theme {
   --font-georgia: "Georgia", sans-serif;
-  --color-primary:#145DB8;
-  --color-secondry: #05162C;
+  --color-primary: #145db8;
+  --color-secondry: #05162c;
 }
 @layer components {
   .border-inputs {
