@@ -181,3 +181,13 @@
     color: #6D7379;
   }
 }
+@theme {
+  --font-georgia: "Georgia", sans-serif;
+  --color-primary:#145DB8;
+  --color-secondry: #05162C;
+}
+@layer components {
+  .border-inputs {
+    @apply border border-[#BBC1C7] rounded-[10px];
+  }
+}
