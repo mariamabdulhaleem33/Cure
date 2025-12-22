@@ -1,7 +1,7 @@
 import MainLayout from "@/components/layout/MainLayout";
 import EditProfileForm from "@/components/Profile/EditProfileForm/EditProfileForm";
 import Profile from "@/pages/Profile";
-// import Home from "@/Pages/Home"
+import Home from "@/pages/Home";
 import Search from "@/components/search-page/Search";
 import { Route, Routes } from "react-router-dom";
 import AppointmentPayment from "@/components/payment/AppointmentPayment";
@@ -21,7 +21,7 @@ export default function AppRoutes() {
       <Route path="otp" element={<Otp />} />
 
       <Route path="/" element={<MainLayout />}>
-        {/* <Route index element={<Home />} /> */}
+        <Route index element={<Home />} />
         <Route path="search" element={<Search />} />
         <Route path="booking" element={<Booking />} />
         <Route path="payment" element={<AppointmentPayment />} />
