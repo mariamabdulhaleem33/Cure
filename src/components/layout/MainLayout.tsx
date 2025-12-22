@@ -11,7 +11,7 @@ const MainLayout: React.FC = () => {
     <Provider store={store}>
       <div className="min-h-screen bg-white flex flex-col">
         <Navbar />
-        <div className="grow">
+        <div className="">
           <Outlet />
         </div>
         <Footer />
