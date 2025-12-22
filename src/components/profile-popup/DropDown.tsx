@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { DropdownItem } from "./DropDownItem";
 import {
   PaymentIcon,
@@ -19,6 +20,8 @@ const SettingsHeaderIcon = ({
 }) => <SettingsIcon className={`${className} text-[#145DB8]`} />;
 
 const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
+  const navigate = useNavigate();
+
   const handlePaymentClick = () => {
     console.log("Payment Method clicked");
   };
@@ -28,7 +31,10 @@ const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
   };
 
   const handleSettingsClick = () => {
-    console.log("Settings clicked");
+    navigate("/profile/edit");
+    if (onClose) {
+      onClose();
+    }
   };
 
   const handlePrivacyClick = () => {
@@ -92,18 +98,23 @@ const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
             <p className={TYPOGRAPHY.address}>{user.address}</p>
           </div>
         </div>
-        <div
-          className="flex-shrink-0"
+        <button
+          onClick={handleSettingsClick}
+          className="flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
           style={{
             width: `${ICON_SIZES.header.width}px`,
             height: `${ICON_SIZES.header.height}px`,
             display: "flex",
             justifyContent: "flex-end",
             alignItems: "center",
+            background: "none",
+            border: "none",
+            padding: 0,
           }}
+          aria-label="Go to settings"
         >
           <SettingsHeaderIcon className="w-5 h-5" />
-        </div>
+        </button>
       </div>
       <ul
         className={`flex flex-col flex-1 overflow-visible ${styles.profileMenuMobile}`}
