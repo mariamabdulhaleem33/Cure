@@ -1,6 +1,6 @@
-import CodeVerifaction from "@/components/auth/codeVerifaction/CodeVerifaction"
-import SignUpBg from "@/components/auth/signup/SignUpBg"
-import Logo from "@/components/layout/navbar/Logo"
+import CodeVerifaction from "@/components/auth/codeVerifaction/CodeVerifaction";
+import SignUpBg from "@/components/auth/signup/SignUpBg";
+import Logo from "@/components/layout/navbar/Logo";
 
 const Otp = () => {
     return (
@@ -19,4 +19,4 @@ const Otp = () => {
     )
 }
 
-export default Otp
+export default Otp;

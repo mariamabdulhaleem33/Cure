@@ -1,21 +1,33 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-
 import Navbar from "./navbar/Navbar";
-import HeroSection from "../home/hero/HeroSection";
 import Footer from "./footer/footer";
+
+import { Outlet } from "react-router-dom";
+
+import FooterAd from "./footer/FooterAd";
+import QuestionsAccordion from "@/components/home/faq/QuestionsAccordion";
+import HeroSection from "../home/hero/HeroSection";
+
 
 const MainLayout: React.FC = () => {
   return (
     <Provider store={store}>
       <div className="min-h-screen bg-white flex flex-col">
         <Navbar />
+
+        <div className="grow">
+          <Outlet />
+        </div>
+
         <div className="flex-grow">
           <HeroSection />
-        </div>
+          </div>
+          <QuestionsAccordion/>
+          <FooterAd/>
         <Footer />
-      </div>
+            </div>
     </Provider>
   );
 };
