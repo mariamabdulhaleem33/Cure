@@ -25,7 +25,7 @@ export default function AppRoutes() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="search" element={<Search />} />
-        <Route path="booking" element={<Booking />} />
+        <Route path="booking/:id" element={<Booking />} />
         <Route path="appointments" element={<YourAppointments />} />
         <Route path="payment" element={<AppointmentPayment />} />
         <Route path="rate" element={<ReviewCard />} />
