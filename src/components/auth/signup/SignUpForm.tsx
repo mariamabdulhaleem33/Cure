@@ -63,7 +63,9 @@ const SignUpForm = () => {
         onSuccess: (data) => {
 
             console.log('done', data)
-            navigate('/otp', { state: { phone: data.phone } })
+            if(data) {
+                navigate('/otp', { state: { phone: data.data.phone } })
+            }
         },
         onError: (error: AxiosError<SignUpErrorResponse>) => {
             const serverErrors = error?.response?.data?.errors as TserverErrors;
