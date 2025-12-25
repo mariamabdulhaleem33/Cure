@@ -11,6 +11,7 @@ import SignIn from "@/pages/signin/SignIn";
 import SignUp from "@/pages/signup/SignUp";
 import Otp from "@/pages/otp/Otp";
 import YourAppointments from "@/features/patient/pages/YourAppointments";
+import PasswordManagement from "@/components/Profile/PasswordManagement/PasswordManagement";
 // import ContactUs from "@/features/contact-us/components/pages/ContactUs";
 // import Chat from "@/features/chat/components/pages/chat";
 
@@ -24,7 +25,7 @@ export default function AppRoutes() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="search" element={<Search />} />
-        <Route path="booking" element={<Booking />} />
+        <Route path="booking/:id" element={<Booking />} />
         <Route path="appointments" element={<YourAppointments />} />
         <Route path="payment" element={<AppointmentPayment />} />
         <Route path="rate" element={<ReviewCard />} />
@@ -32,6 +33,7 @@ export default function AppRoutes() {
         {/* <Route path="contact-us" element={<ContactUs />} /> */}
         <Route path="profile" element={<Profile />}>
           <Route path="edit" element={<EditProfileForm />} />
+          <Route path="password_management" element={<PasswordManagement />} />
         </Route>
       </Route>
     </Routes>

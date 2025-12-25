@@ -20,7 +20,7 @@ const MainLayout: React.FC = () => {
         </div>
           <FooterAd/>
         <Footer />
-            </div>
+      </div>
     </Provider>
   );
 };
