@@ -7,7 +7,7 @@ import Footer from "./footer/footer";
 import { Outlet } from "react-router-dom";
 
 import FooterAd from "./footer/FooterAd";
-import QuestionsAccordion from "@/components/home/faq/QuestionsAccordion";
+
 
 const MainLayout: React.FC = () => {
   return (
@@ -18,8 +18,7 @@ const MainLayout: React.FC = () => {
         <div className="grow">
           <Outlet />
         </div>
-        <QuestionsAccordion />
-        <FooterAd />
+          <FooterAd/>
         <Footer />
       </div>
     </Provider>
