@@ -3,11 +3,10 @@ import { Provider } from "react-redux";
 import { store } from "@/store";
 import Navbar from "./navbar/Navbar";
 import Footer from "./footer/footer";
-
 import { Outlet } from "react-router-dom";
-
 import FooterAd from "./footer/FooterAd";
 import QuestionsAccordion from "@/components/home/faq/QuestionsAccordion";
+
 
 const MainLayout: React.FC = () => {
   return (
