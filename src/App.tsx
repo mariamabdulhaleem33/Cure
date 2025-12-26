@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AppRoutes from "./routes/index";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "@/components/ui/sonner";
 
 const queryClient = new QueryClient();
 
@@ -14,16 +14,7 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <AppRoutes />
-          <Toaster
-            position="bottom-center"
-            toastOptions={{
-              duration: 3000,
-              style: {
-                background: "#333",
-                color: "#fff",
-              },
-            }}
-          />
+          <Toaster />
         </BrowserRouter>
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
