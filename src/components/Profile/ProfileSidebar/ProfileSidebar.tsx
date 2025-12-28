@@ -11,7 +11,7 @@ const NavItemData = [
     child: <User className="w-5 h-5 text-slate-900" />,
   },
   {
-    to: "/profile/password_management",
+    to: "/profile/change-password",
     text: "Password management",
     child: <LockKeyhole className="w-5 h-5 text-slate-900" />,
   },
