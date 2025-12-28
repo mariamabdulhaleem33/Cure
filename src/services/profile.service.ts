@@ -1,7 +1,6 @@
 import api from "@/api/axios";
 import type { ProfileResponse } from "@/api/userProfile";
 import type { ChangePasswordFormData } from "@/schemas/profile/change-password.schema";
-import type { EditProfileApiData } from "@/schemas/profile/edit-profile.schema";
 import type { ChangePasswordResponse } from "@/Types/Profile.types";
 import {transformProfileResponse} from "@/utils/profileTransformer";
 
@@ -25,7 +24,7 @@ export const ProfilAPI = {
     return transformProfileResponse(response.data);
   },
 
-  editProfileDetails: async (data:EditProfileApiData): Promise<ProfileResponse> => {
+  editProfileDetails: async (data:FormData): Promise<ProfileResponse> => {
     const response = await api.put<ProfileResponse>(
       "/patient/profile/update",
       data
