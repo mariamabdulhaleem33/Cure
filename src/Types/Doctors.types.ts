@@ -65,6 +65,18 @@ export interface DoctorProps {
   price: number
   onClick?: () => void
   userId?: string
+  address: string
+}
+
+export interface TopRatedDoctor {
+  id: number
+  name: string
+  specialization: string
+  average_rating: number
+  reviews_count: number
+  session_price: number
+  availability_slots: AvailabilitySlot[]
+  clinic_location: ClinicLocation
 }
 
 /* NEW TYPE FOR THE NEW API RESPONSE */

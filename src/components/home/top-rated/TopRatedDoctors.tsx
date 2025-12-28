@@ -232,13 +232,14 @@ export default function TopRatedDoctors() {
                 <DoctorCard
                   key={doc.id}
                   imageUrl={test}
-                  name={doc.user.name}
+                  name={doc.name}
                   specialty={doc.specialization}
-                  rate={3}
+                  rate={doc.average_rating}
                   startTime={doc.availability_slots[0].from}
                   endTime={doc.availability_slots[0].to}
                   forBooking={true}
-                  price={Number(doc.session_price)}
+                  price={doc.session_price}
+                  address={doc.clinic_location.address}
                 />
               </CarouselItem>
             ))}
