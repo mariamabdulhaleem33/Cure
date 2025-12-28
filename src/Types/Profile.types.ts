@@ -6,6 +6,12 @@ export interface NavlinkProps {
   text: string;
 }
 
+export type ProfileImgProps={
+  src?: string,
+  editable: boolean,
+  style?: string
+}
+
 export interface ChangePasswordResponse {
   message: string;
 } 
@@ -17,6 +23,6 @@ export interface ProfileResponse {
   mobile_number: string;
   location?: string;
   birth_date?: string;
-  profile_photo?: File;
+  profile_photo?: string;
 }
 

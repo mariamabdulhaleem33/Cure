@@ -65,7 +65,7 @@ const ChangePassword: FC = () => {
       className="w-full flex self-start flex-col justify-start items-start  gap-10"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <p className="font-secondary text-3xl text-slate-900">Change Password</p>
+      <p className="font-secondary text-2xl lg:text-3xl text-slate-900">Change Password</p>
       {inputFields.map((field) => (
         <div className={field.fieldStyle} key={field.id}>
           <Label htmlFor={field.id} className="font-normal text-slate-900">
@@ -81,7 +81,7 @@ const ChangePassword: FC = () => {
         </div>
       ))}
       <div className="w-full  col-start-2 flex flex-col justify-end items-end">
-        <Button className="shadow-sm w-1/2 bg-sky-700 hover:bg-sky-800">
+        <Button className="shadow-sm w-full lg:w-1/2 bg-sky-700 hover:bg-sky-800">
           Update
         </Button>
       </div>
