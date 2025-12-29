@@ -86,9 +86,9 @@ function PaymentContent() {
       setErrorMessage(error.message || "An unexpected error occurred during payment.");
       setIsErrorOpen(true);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <>

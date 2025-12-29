@@ -6,9 +6,24 @@ export interface NavlinkProps {
   text: string;
 }
 
-export interface ProfileImgProps{
-  src?:string;
-  editable:boolean;
-  onSelect?:(file:File)=>void;
-  style:string;
+export type ProfileImgProps={
+  src?: string,
+  editable: boolean,
+  style?: string
 }
+
+export interface ChangePasswordResponse {
+  message: string;
+} 
+
+export interface ProfileResponse {
+  id: number;
+  name: string;
+  email: string;
+  mobile_number: string;
+  location?: string;
+  birth_date?: string;
+  profile_photo?: string;
+  profile_photo_url?:string;
+}
+

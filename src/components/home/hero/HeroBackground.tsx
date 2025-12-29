@@ -11,7 +11,8 @@ const HeroBackground: React.FC = () => {
         left-1/2
         -translate-x-1/2
         -translate-y-1/2
-        w-[900px]
+        w-230
+        origin/main
         max-w-none
         opacity-70
         pointer-events-none
