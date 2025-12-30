@@ -1,57 +1,28 @@
 import { Heart, MessageCircleMore } from "lucide-react";
 import doc from "../../../assets/doc.jpg";
-import api from "@/api/axios";
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import { useToggleFavorite } from "@/hooks/useToggleFavorite";
 
 type IProps = {
   name: string;
   specialty: string;
   photo: string | null;
-  doctorId: number | null;
-  initialIsFavorite?: boolean;
+  doctorId: number ;
 };
 const Header = ({
   name,
   specialty,
   photo,
   doctorId,
-  initialIsFavorite = false,
 }: IProps) => {
   
-  const mutation = useMutation({
-    mutationFn: () => api.post(`/addOrRemove-favourite/${doctorId}`),
-
-    onMutate: async () => {
-      setIsFavorite((prev) => !prev);
-    },
-
-    onError: () => {
-      setIsFavorite((prev) => !prev);
-      toast.error("Please Try Again");
-    },
-
-    onSuccess: () => {
-      toast(isFavorite 
-          ? "Doctor added to favorites successfully!" 
-          : "Doctor removed from favorites")
-    },
-  });
-
-  const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
-
-  const handleToggle = () => {
-    mutation.mutate();
-  };
+  const {isFavorite, toggleFavorite}= useToggleFavorite(doctorId);
 
   return (
     <>
       <div className="flex items-start justify-between">
         <button
-          onClick={handleToggle}
+          onClick={toggleFavorite}
           className="w-[40px] h-[40px] flex items-center justify-center rounded-full bg-white"
         >
           <Heart
@@ -60,7 +31,7 @@ const Header = ({
               isFavorite ? "fill-red-500 text-red-500" : "text-gray-600"
             }
           />
-          </button>
+        </button>
         <div className="flex flex-col items-center justify-center">
           <div className="w-28.25 h-28.25 relative">
             <img

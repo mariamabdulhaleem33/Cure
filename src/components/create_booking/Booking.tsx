@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const Booking = () => {
   const { id } = useParams();
-  const doctorId = id ? Number(id) : null;
+  const doctorId = Number(id);
   return (
     <section className="py-6">
       <div className="max-w-7xl px-5 mx-auto">
