@@ -12,12 +12,13 @@ import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import type { AxiosError } from "axios"
 import type { SignUpErrorResponse, TserverErrors } from "../types/SignUpTypes"
+import { Spinner } from "@/components/ui/spinner"
 
 
 const SignUpForm = () => {
     console.log(import.meta.env.VITE_BASE_URL)
     const navigate = useNavigate()
-    const { register, handleSubmit, formState: { errors },setError } = useForm<typeForm>({
+    const { register, handleSubmit, formState: { errors }, setError } = useForm<typeForm>({
         mode: 'onChange',
         resolver: zodResolver(signUpSchema)
     });
@@ -58,13 +59,13 @@ const SignUpForm = () => {
             error: errors.password_confirmation
         },
     ]
-    const { mutate } = useMutation({
+    const { mutate , isPending } = useMutation({
         mutationFn: signUpFn,
         onSuccess: (data) => {
 
             console.log('done', data)
-            if(data) {
-                console.log('helo',data)
+            if (data) {
+                console.log('helo', data)
                 navigate('/otp', { state: { mobile_number: data.user.mobile_number } })
             }
         },
@@ -88,7 +89,7 @@ const SignUpForm = () => {
         <div className="w-[90%] sm:w-[90%]  mx-auto lg:w-105 flex flex-col justify-center  overflow-x-hidden my-20 p-2 ">
             <div className="w-full lg:w-92.75 mx-auto">
                 <AuthFormHeading title="sign up" />
-                <p className="text-[#6d7379] text-[12px] w-full lg:w-92.75">Please provide all information required to create your account</p>
+                <p className="text-text-neutral-darker text-[12px] w-full lg:w-92.75">Please provide all information required to create your account</p>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-94.5 mx-auto mt-5 flex flex-col gap-3 ">
                 {
@@ -101,10 +102,13 @@ const SignUpForm = () => {
                         )
                     })
                 }
-                <button type="submit" className="bg-primary text-white rounded-[10px] py-2 cursor-pointer">Sign in</button>
+                <button type="submit" className="bg-primary text-white rounded-[10px] py-2 cursor-pointer flex justify-center items-center gap-1">
+                    {isPending && <Spinner className="text-white w-6" />}
+                    Sign in
+                </button>
                 <OrDivider />
                 <GoogleButton />
-                <p className="text-center text-[12px]">Already have an account! <Link to={'/login'} className="text-primary">Sign in</Link></p>
+                <p className="text-center text-[12px]">Already have an account! <Link to={'/login'} className="text-primary">Sign up</Link></p>
             </form>
         </div>
     )
