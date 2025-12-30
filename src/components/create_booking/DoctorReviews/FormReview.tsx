@@ -15,7 +15,7 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Pen, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { toast } from "sonner";
 
 // ===== Zod schema =====
