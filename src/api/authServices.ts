@@ -1,6 +1,5 @@
 import api from './axios';
 
-// Types matching actual API response
 export interface LoginResponse {
   Status: boolean;
   message: string;

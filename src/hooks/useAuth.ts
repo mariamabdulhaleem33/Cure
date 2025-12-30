@@ -1,4 +1,3 @@
-// src/hooks/useAuth.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useMemo } from "react"
