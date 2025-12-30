@@ -9,13 +9,12 @@ const api: AxiosInstance = axios.create({
 // Request interceptor to attach token
 api.interceptors.request.use(
   (config) => {
-    // Get token from localStorage (adjust storage method as needed)
-    const token = localStorage.getItem('authToken');
-    
+    const token = localStorage.getItem("authToken");
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
+
     return config;
   },
   (error) => {
@@ -31,10 +30,11 @@ api.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (error.response) {
-      const { status } = error.response;
+      const { status, config } = error.response;
+      const isLogoutRequest = config?.url?.includes('/logout');
       
       // Handle token expiration (401 Unauthorized)
-      if (status === 401) {
+      if (status === 401 && !isLogoutRequest) {
         // Clear stored token
         localStorage.removeItem('authToken');
         
@@ -61,19 +61,5 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("authToken"); 
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-
-  if (config.data instanceof FormData) {
-    delete config.headers["Content-Type"];
-  }
-
-  return config;
-});
 
 export default api
