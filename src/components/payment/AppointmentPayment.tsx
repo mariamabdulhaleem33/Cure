@@ -81,7 +81,7 @@ function PaymentContent() {
         setErrorMessage(result.error.message || "Payment Declined");
         setIsErrorOpen(true);
       } else if (result.paymentIntent?.status === "succeeded") {
-        navigate("/appointments"); 
+        navigate("/appointments");
       }
     } catch (error: any) {
       setErrorMessage(error.message || "An unexpected error occurred during payment.");
