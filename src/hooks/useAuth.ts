@@ -17,13 +17,8 @@ export const useLogin = () => {
     mutationFn: (credentials: LoginCredentials) => loginAPI(credentials),
     onSuccess: (response: LoginResponse) => {    
       if (response.Status && response.data.Token) {
-        // Store token in localStorage
         localStorage.setItem("authToken", response.data.Token);
-
-        // Cache the auth data in React Query
         queryClient.setQueryData(["auth"], response);
-
-        // Navigate to dashboard
         navigate("/");
       }
     },
@@ -52,7 +47,6 @@ export const useLogout = () => {
 };
 
 // Hook to check if user is authenticated
-
 export const useAuthState = () => {
   const queryClient = useQueryClient();
   const authData = queryClient.getQueryData<LoginResponse>(["auth"]);
@@ -61,6 +55,7 @@ export const useAuthState = () => {
     const token = localStorage.getItem("authToken");
     return !!(token || authData?.data?.Token);
   }, [authData]);
+
   useEffect(() => {
     const handleStorageChange = () => {
       queryClient.invalidateQueries({ queryKey: ["auth"] });  

@@ -1,42 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
+import { useQuery} from '@tanstack/react-query';
 import { getProfileAPI } from '@/api/userProfile';
 import { useAuthState } from './useAuth';
-import { useUserLocation } from './useUserLocation';
-
-// Reverse geocoding function to convert coordinates to address
-const reverseGeocode = async (lat: number, lng: number): Promise<string | null> => {
-  try {
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`,
-      {
-        headers: {
-          'User-Agent': 'AppointDash/1.0', // Required by Nominatim
-        },
-      }
-    );
-    const data = await response.json();
-    
-    if (data.address) {
-      const { city, town, village, state, country } = data.address;
-      const locationName = city || town || village || state || '';
-      const countryName = country || '';
-      return locationName && countryName ? `${locationName}, ${countryName}` : locationName || countryName || null;
-    }
-    return null;
-  } catch (error) {
-    console.error('Reverse geocoding failed:', error);
-    return null;
-  }
-};
+import { formatLocation } from '@/utils/formatLocation';
+import { useMemo } from 'react';
 
 export const useProfile = () => {
   const { isAuthenticated } = useAuthState();
-  const { lat, lng, isLoadingLocation, geoError } = useUserLocation();
-  const [detectedAddress, setDetectedAddress] = useState<string | null>(null);
-  const [isLoadingGeocode, setIsLoadingGeocode] = useState(false);
 
-  // Fetch profile from API
+
   const { data: profileResponse, isLoading, error } = useQuery({
     queryKey: ['profile'],
     queryFn: getProfileAPI,
@@ -46,49 +17,28 @@ export const useProfile = () => {
   });
 
   const profileUser = profileResponse?.user;
-  console.log('🟢 Profile User Data:', profileUser);
 
-  // Reverse geocode coordinates if user hasn't provided a location
-  useEffect(() => {
-    const shouldGeocode = !profileUser?.location && !isLoadingLocation && !geoError && lat && lng;
-    
-    if (!shouldGeocode) {
-      return;
+
+  const parseLocation = (location: string | null | undefined): string | null => {
+    if (!location) return null;
+    try {
+      return formatLocation(location);
+    } catch (error) {
+      console.error('Failed to parse location JSON:', error);
+      return location;
     }
-
-    let cancelled = false;
-    
-    // Start geocoding asynchronously
-    (async () => {
-      setIsLoadingGeocode(true);
-      try {
-        const address = await reverseGeocode(lat, lng);
-        if (!cancelled) {
-          setDetectedAddress(address);
-          setIsLoadingGeocode(false);
-        }
-      } catch {
-        if (!cancelled) {
-          setIsLoadingGeocode(false);
-        }
-      }
-    })();
-    
-    return () => {
-      cancelled = true;
-    };
-  }, [profileUser?.location, isLoadingLocation, geoError, lat, lng]);
-
-  // Use API data first, then detected location, then null
-  const user = {
-    name: profileUser?.name || '',
-    address: profileUser?.location || detectedAddress || null,
-    avatarUrl: profileUser?.profile_photo_url || profileUser?.profile_photo || null,
   };
+
+
+  const user = useMemo(() => ({
+    name: profileUser?.name || '',
+    address: parseLocation(profileUser?.location) || null,
+    avatarUrl: profileUser?.profile_photo_url || profileUser?.profile_photo || null,
+  }), [profileUser?.name, profileUser?.location, profileUser?.profile_photo_url, profileUser?.profile_photo]);
 
   return {
     user,
-    isLoading: isLoading || isLoadingGeocode,
+    isLoading,
     error,
     profileData: profileResponse,
   };

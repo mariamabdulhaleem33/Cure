@@ -116,7 +116,7 @@ const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
           <div className="flex items-center gap-1.5 mt-1">
             <LocationIcon className="w-3.5 h-3.5 flex-shrink-0" />
             <p className={TYPOGRAPHY.address}>
-              {user.address || "(No location has provided)"}
+              {user.address || "No location provided yet"}
             </p>
           </div>
         </div>
