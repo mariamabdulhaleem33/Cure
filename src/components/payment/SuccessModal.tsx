@@ -1,4 +1,6 @@
 import { ShieldCheck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 interface SuccessModalProps {
     isOpen: boolean;
@@ -7,14 +9,16 @@ interface SuccessModalProps {
     date: string;
     time: string;
 }
-
 export default function SuccessModal({
+
     isOpen,
     onClose,
     doctorName,
     date,
     time
 }: SuccessModalProps) {
+    const navigate = useNavigate();
+
     if (!isOpen) return null;
 
     return (
@@ -45,8 +49,10 @@ export default function SuccessModal({
                     Done
                 </button>
 
-                <button className="text-gray-400 text-sm hover:text-gray-600 transition-colors">
+                <button onClick={() => navigate("/appointments")} className="text-gray-400 text-sm hover:text-gray-600 transition-colors">
                     Edit your appointment
+
+
                 </button>
             </div>
         </div>
