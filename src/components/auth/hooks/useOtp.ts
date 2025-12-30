@@ -8,7 +8,7 @@ export const useOtp = (
   onErrorVerify: (error: AxiosError<TErrorResponse>) => void,
   onResendError: (time: number) => void
 ) => {
-  const verifyOtp = useMutation<TSignupResponse, AxiosError<TErrorResponse>, Totp>({
+  const verifyOtp = useMutation<TSignupResponse, AxiosError<TErrorResponse>,Totp >({
     mutationFn: otpFn,
     onSuccess: onSuccessVerify,
     onError: onErrorVerify,

@@ -6,6 +6,7 @@ import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOtp } from "../hooks/useOtp";
+import { Spinner } from "@/components/ui/spinner";
 
 const OtpForm = () => {
     const navigate = useNavigate()
@@ -21,6 +22,9 @@ const OtpForm = () => {
         return () => clearInterval(interval);
     }, [timer]);
     const mobile_number = location.state?.mobile_number;
+    if(!mobile_number) {
+        navigate("/signup")
+    }
     const { control, handleSubmit, register, formState: { errors }, setError
     } = useForm<otpType>({
         mode: 'onChange',
@@ -80,9 +84,12 @@ const OtpForm = () => {
                 <InputError error={errors.mobile_number} />
             </div>
             <button type="button" disabled={timer > 0 || verifyOtp.isPending} onClick={() => resendOtp.mutate({ mobile_number })} className="text-[14px] ">
-                {timer > 0 ? <> Resend code in <span className="text-primary">{timer.toFixed()}</span> s</> : <span>Resend code</span>}
+                {timer > 0 ? <> Resend code in <span className="text-primary">{timer.toFixed()}</span> s</> : <span className="text-primary">Resend code</span>}
             </button>
-            <button type="submit" className="bg-primary text-white rounded-[10px] py-2 cursor-pointer w-full "> verify</button>
+            <button type="submit" className="bg-primary text-white rounded-[10px] py-2 cursor-pointer w-full flex justify-center items-center gap-1">
+                  {verifyOtp.isPending && <Spinner className="text-white w-5" /> }
+                  verify
+            </button>
         </form>
     )
 }
