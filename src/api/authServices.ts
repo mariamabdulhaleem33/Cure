@@ -13,7 +13,19 @@ export interface LoginCredentials {
   password: string;
 }
 
+// Logout response type
+export interface LogoutResponse {
+  Status: boolean;
+  message: string;
+}
+
+// API Functions
 export const loginAPI = async (credentials: LoginCredentials): Promise<LoginResponse> => {
   const response = await api.post<LoginResponse>('/login', credentials);
+  return response.data;
+};
+
+export const logoutAPI = async (): Promise<LogoutResponse> => {
+  const response = await api.post<LogoutResponse>('/logout');
   return response.data;
 };

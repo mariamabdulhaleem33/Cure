@@ -3,20 +3,17 @@ import axios, { type AxiosInstance, type AxiosResponse, type AxiosError } from "
 const api: AxiosInstance = axios.create({
   baseURL: "https://round8-cure-php-team-three.huma-volve.com/api/",
   timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 // Request interceptor to attach token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('authToken');
-    
+    const token = localStorage.getItem("authToken");
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
+
     return config;
   },
   (error) => {
@@ -31,9 +28,12 @@ api.interceptors.response.use(
   },
   (error: AxiosError<{ Status?: boolean; message?: string }>) => {
     if (error.response) {
-      const { status, data } = error.response;
+      const { status, config } = error.response;
+      const isLogoutRequest = config?.url?.includes('/logout');
       
-      if (status === 401) {
+      // Handle token expiration (401 Unauthorized)
+      if (status === 401 && !isLogoutRequest) {
+        // Clear stored token
         localStorage.removeItem('authToken');
         window.location.href = '/login';
         console.error(data?.message || 'Session expired. Please log in again.');
@@ -54,4 +54,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default api
