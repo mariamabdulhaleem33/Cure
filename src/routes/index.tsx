@@ -19,9 +19,6 @@ import Favorites from "@/pages/Favorites";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="login" element={<SignIn />} />
-      <Route path="signup" element={<SignUp />} />
-      <Route path="otp" element={<Otp />} />
 
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
@@ -39,6 +36,7 @@ export default function AppRoutes() {
           <Route path="change-password" element={<ChangePassword />} />
         </Route>
       </Route>
+
     </Routes>
-  );
+  )
 }

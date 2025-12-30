@@ -1,4 +1,3 @@
-// src/api/axios.ts
 import axios, { type AxiosInstance, type AxiosResponse, type AxiosError } from "axios"
 
 const api: AxiosInstance = axios.create({
@@ -25,10 +24,9 @@ api.interceptors.request.use(
 // Response interceptor to handle errors and token expiration
 api.interceptors.response.use(
   (response: AxiosResponse) => {
-    // Return successful response as-is
     return response;
   },
-  (error: AxiosError) => {
+  (error: AxiosError<{ Status?: boolean; message?: string }>) => {
     if (error.response) {
       const { status, config } = error.response;
       const isLogoutRequest = config?.url?.includes('/logout');
@@ -37,22 +35,16 @@ api.interceptors.response.use(
       if (status === 401 && !isLogoutRequest) {
         // Clear stored token
         localStorage.removeItem('authToken');
-        
-        // Redirect to login page (adjust path as needed)
         window.location.href = '/login';
-        
-        // Optional: Show a message to the user
-        console.error('Session expired. Please log in again.');
+        console.error(data?.message || 'Session expired. Please log in again.');
       }
       
-      // Handle forbidden access (403)
       if (status === 403) {
-        console.error('Access forbidden. Insufficient permissions.');
+        console.error(data?.message || 'Access forbidden. Insufficient permissions.');
       }
       
-      // Handle server errors (500)
       if (status >= 500) {
-        console.error('Server error. Please try again later.');
+        console.error(data?.message || 'Server error. Please try again later.');
       }
     } else if (error.request) {
       console.error('Network error. Please check your connection.');
