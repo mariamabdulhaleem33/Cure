@@ -14,7 +14,7 @@ export function AppointmentCard({ card }: AppointmentCardProps) {
   if (!card) return null;
   console.log("cardcard");
 
-  const { status, booking_date, booking_time, doctor, clinic_location } = card;
+  const { status, date, time, doctor, clinic } = card;
 
   console.log("RQ data:", card);
 
@@ -52,7 +52,7 @@ export function AppointmentCard({ card }: AppointmentCardProps) {
             className={`flex items-center gap-2 ${config.cardHeaderDateColor}`}
           >
             <Calendar size={16} />
-            <span>{`${booking_date} · ${booking_time}`}</span>
+            <span>{`${date} · ${time}`}</span>
           </div>
           <span
             className={`font-medium ${
@@ -74,16 +74,15 @@ export function AppointmentCard({ card }: AppointmentCardProps) {
           <div className="flex-1">
             <h3 className="font-semibold text-sm">{doctor.name}</h3>
             <p className="text-xs text-muted-foreground">
-              {String(doctor.specialization.name)}
+              {String(doctor.specialization)}
             </p>
 
             <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
               <MapPin size={14} />
-              <span>{clinic_location?.address}</span>
+              <span>{clinic?.address}</span>
             </div>
           </div>
         </div>
-
         <div className="flex gap-2">
           {status === "Completed" && (
             <>
