@@ -47,7 +47,7 @@ export function TabsDemo({ data }: AppointmentListProps) {
         defaultValue="all"
         className="gap-5"
       >
-        <div className="flex justify-between flex-row-reverse ">
+        <div className="flex flex-col gap-4 md:flex-row-reverse md:justify-between">
           <Calendar28
             onDateChange={handleDateChange}
             selectedDate={selectedDate}
@@ -55,6 +55,7 @@ export function TabsDemo({ data }: AppointmentListProps) {
           <TabsList className="bg-none">
             {TABS.map(tab => (
               <TabsTrigger
+                key={tab.value}
                 value={tab.value}
                 className={tabsTriggerClass}
               >
