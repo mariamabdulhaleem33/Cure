@@ -48,7 +48,6 @@ function PaymentContent() {
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
   /**
    * STRIPE TRANSACTION HANDLER
    * This confirms the payment intent created in the previous step.
@@ -81,7 +80,7 @@ function PaymentContent() {
         setErrorMessage(result.error.message || "Payment Declined");
         setIsErrorOpen(true);
       } else if (result.paymentIntent?.status === "succeeded") {
-        navigate("/appointments");
+        setIsSuccessOpen(true);
       }
     } catch (error: any) {
       setErrorMessage(error.message || "An unexpected error occurred during payment.");
@@ -95,12 +94,14 @@ function PaymentContent() {
     <>
       <SuccessModal
         isOpen={isSuccessOpen}
-        onClose={() => setIsSuccessOpen(false)}
+        onClose={() => {
+          setIsSuccessOpen(false);
+          navigate("/appointments");
+        }}
         doctorName={bookingData.doctor?.user?.name || "Doctor"}
         date={bookingData.booking_date}
         time={bookingData.booking_time}
       />
-
       <ErrorModal
         isOpen={isErrorOpen}
         onClose={() => setIsErrorOpen(false)}
