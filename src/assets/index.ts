@@ -14,6 +14,7 @@ import homeMap from "./map.png";
 import test from "./test.jpg";
 import apple from "./Frame1000001084.png";
 import paypal from "./paypal.svg";
+import doc from "./doc.jpg"
 export {
   homeMap,
   reviews,
@@ -31,4 +32,5 @@ export {
   UserProfile,
   apple,
   paypal,
+  doc
 };

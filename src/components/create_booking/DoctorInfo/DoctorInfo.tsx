@@ -5,7 +5,7 @@ import Header from "./Header";
 import { useDoctor } from "../hooks/useDoctor";
 import DoctorCardSkeleton from "../Skelton/DoctorCardSkeleton";
 type IProps = {
-  doctorId: number | null;
+  doctorId: number;
 };
 const DoctorInfo = ({ doctorId }: IProps) => {
   const token: string | null = localStorage.getItem("authToken");
@@ -19,6 +19,7 @@ const DoctorInfo = ({ doctorId }: IProps) => {
         name={doctorInfo?.user?.name}
         specialty={doctorInfo?.specialization?.name}
         photo={doctorInfo?.user?.profile_photo}
+        doctorId={doctorId}
       />
       <Details
         experience={Number(doctorInfo?.experience_years) || 0}

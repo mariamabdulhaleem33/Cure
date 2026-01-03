@@ -1,19 +1,36 @@
 import { Heart, MessageCircleMore } from "lucide-react";
-import doc from "../../../assets/doc1.webp";
-
+import doc from "../../../assets/doc.jpg";
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import { useToggleFavorite } from "@/hooks/useToggleFavorite";
 
 type IProps = {
   name: string;
   specialty: string;
   photo: string | null;
+  doctorId: number ;
 };
-const Header = ({ name, specialty, photo }: IProps) => {
+const Header = ({
+  name,
+  specialty,
+  photo,
+  doctorId,
+}: IProps) => {
+  
+  const {isFavorite, toggleFavorite}= useToggleFavorite(doctorId);
+
   return (
     <>
       <div className="flex items-start justify-between">
-        <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white cursor-pointer">
-          <Heart size={24} />
+        <button
+          onClick={toggleFavorite}
+          className="w-[40px] h-[40px] flex items-center justify-center rounded-full bg-white"
+        >
+          <Heart
+            size={24}
+            className={
+              isFavorite ? "fill-red-500 text-red-500" : "text-gray-600"
+            }
+          />
         </button>
         <div className="flex flex-col items-center justify-center">
           <div className="w-28.25 h-28.25 relative">
