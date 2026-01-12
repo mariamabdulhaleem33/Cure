@@ -52,16 +52,14 @@ I worked as a **Frontend Developer**, focusing mainly on the **Profile** and **F
 ## 📸 Screenshots
 
 ### Profile Page
-![Profile Page](./screenshots/profile-page.png)
+![Profile Page](./screenshots/profile.png)
 
 ### Favorites List
-![Favorites List](./screenshots/favorites-list.png)
-
-> _You can add your real screenshots inside a `screenshots` folder in your repo._
+![Favorites List](./screenshots/favorites.png)
 
 ---
 
-## 🚀 Live Demo
+##  Live Demo
 
 Check the live project here:  
 🔗 [Cure Appointment System](https://cure-appointment-system.vercel.app/)
