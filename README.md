@@ -52,10 +52,10 @@ I worked as a **Frontend Developer**, focusing mainly on the **Profile** and **F
 ## 📸 Screenshots
 
 ### Profile Page
-![Profile Page](./screenshots/profile.png)
+![Profile Page](./screenshots/Profile.png)
 
 ### Favorites List
-![Favorites List](./screenshots/favorites.png)
+![Favorites List](./screenshots/Favorites.png)
 
 ---
 
