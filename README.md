@@ -9,7 +9,7 @@
 
 ---
 
-## 🔹 Project Overview
+## 🔵 Project Overview
 
 **Cure** is a team-based doctor appointment system that allows users to:
 
@@ -21,7 +21,7 @@ The project emphasizes smooth user interactions, responsive UI, and efficient fr
 
 ---
 
-## 🌟 My Contribution (Frontend Focus)
+## 🟢 My Contribution (Frontend Focus)
 
 I worked as a **Frontend Developer**, focusing mainly on the **Profile** and **Favorites** features:
 
@@ -33,11 +33,9 @@ I worked as a **Frontend Developer**, focusing mainly on the **Profile** and **F
 - ✅ Integrating frontend features with backend APIs  
 - ✅ Handling form validation and user interactions  
 
-> 💡 All the features above are my direct contributions.
-
 ---
 
-## 🛠 Technologies Used
+## ⚫ Technologies Used
 
 - **React**  
 - **TypeScript**  
@@ -49,7 +47,7 @@ I worked as a **Frontend Developer**, focusing mainly on the **Profile** and **F
 
 ---
 
-## 📸 Screenshots
+## 🟡 Screenshots
 
 ### Profile Page
 ![Profile Page](./screenshots/Profile.png)
@@ -59,14 +57,14 @@ I worked as a **Frontend Developer**, focusing mainly on the **Profile** and **F
 
 ---
 
-##  Live Demo
+## 🔴 Live Demo
 
 Check the live project here:  
 🔗 [Cure Appointment System](https://cure-appointment-system.vercel.app/)
 
 ---
 
-## 💡 Testing Hint
+## 📌 Testing Hint
 
 For testing OTP functionality, use:
 1234
