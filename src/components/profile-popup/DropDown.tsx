@@ -13,6 +13,8 @@ import {
 import type { DropdownProps } from "./types";
 import styles from "./DropDown.module.css";
 import { CLOSE_BUTTON, ICON_SIZES, TYPOGRAPHY } from "./constants";
+import { formatLocation } from "@/utils/formatLocation";
+import { useLogout } from "@/hooks/useLogout";
 
 const SettingsHeaderIcon = ({
   className = "w-6 h-6",
@@ -20,9 +22,9 @@ const SettingsHeaderIcon = ({
   className?: string;
 }) => <SettingsIcon className={`${className} text-[#145DB8]`} />;
 
-const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
+const Dropdown = ({ user, onClose }: DropdownProps) => {
   const navigate = useNavigate();
-
+  const { logout } = useLogout();
   const handlePaymentClick = () => {
     navigate("/payment");
     if (onClose) {
@@ -56,7 +58,7 @@ const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
       className={`
         relative
         w-full h-full
-        md:w-[358px] md:min-h-[396px] md:rounded-[20px]
+        md:w-89.5 md:min-h-99 md:rounded-4xl
         bg-white md:bg-[#F5F6F7]
         flex flex-col
         shadow-xl
@@ -96,20 +98,22 @@ const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
           avatarUrl={user.avatarUrl}
           name={user.name || "User"}
           size="md"
-          className="flex-shrink-0"
+          className="shrink-0"
         />
         <div className="flex-1 min-w-0">
           <p className={TYPOGRAPHY.username}>{user.name || "User"}</p>
           <div className="flex items-center gap-1.5 mt-1">
-            <LocationIcon className="w-3.5 h-3.5 flex-shrink-0" />
+            <LocationIcon className="w-3.5 h-3.5 shrink-0" />
             <p className={TYPOGRAPHY.address}>
-              {user.address || "No location provided yet"}
+              {user.address
+                ? formatLocation(user.address)
+                : "No location provided yet"}
             </p>
           </div>
         </div>
         <button
           onClick={handleSettingsClick}
-          className="flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+          className="shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
           style={{
             width: `${ICON_SIZES.header.width}px`,
             height: `${ICON_SIZES.header.height}px`,
@@ -151,14 +155,13 @@ const Dropdown = ({ user, onLogout, onClose }: DropdownProps) => {
           onClick={handlePrivacyClick}
         />
         <li
-          onClick={onLogout}
+          onClick={logout}
           className="flex items-center px-2 py-2 gap-3 text-red-500 cursor-pointer pt-2 hover:bg-gray-200 rounded-lg transition-colors"
           role="menuitem"
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
-              onLogout();
             }
           }}
           aria-label="Log out"

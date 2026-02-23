@@ -1,29 +1,62 @@
-import api from "@/api/axios"
-import type { Totp, TResendOtpPayload } from "@/components/auth/types/SignUpTypes";
-import type { typeForm } from "@/schemas/signup.schema"
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-export const signUpFn = async (data: typeForm) => {
-    const response = await api.post('register', {
-        name: data.name,
-        email: data.email,
-        mobile_number: data.mobile_number,
-        password: data.password,
-        password_confirmation:data.password_confirmation
-    });
-    console.log(response.data)
-    return response.data;
-}
+import {
+  signInWithPhoneNumber,
+  type ConfirmationResult,
+  type ApplicationVerifier,
+} from "firebase/auth";
+import { auth } from "@/firebase/firebase";
 
-export const otpFn = async (data : Totp ) => {
-    const response = await api.post('otpVerifyForRegister', {
-        mobile_number:data.mobile_number,
-        otp:data.otp
-    });
-    return response.data;
-}
+export const signUpFn = async ({
+  name,
+  email,
+  password,
+  mobile_number,
+}: {
+  email: string;
+  password: string;
+  mobile_number: string;
+  name: string;
+}) => {
+  await createUserWithEmailAndPassword(auth, email, password);
+  return { mobile_number, name, email, password };
+};
 
-export const resendOtpFn = async (data: TResendOtpPayload ) => {
-  const response = await api.post('resendOtp', data);
-  console.log('resend',response)
-  return response.data;
+export const sendOtp = async ({
+  phone,
+  appVerifier,
+}: {
+  phone: string;
+  appVerifier: ApplicationVerifier;
+}): Promise<ConfirmationResult> => {
+  return await signInWithPhoneNumber(auth, phone, appVerifier);
+};
+
+export const verifyOtpCode = async ({
+  confirmationResult,
+  code,
+}: {
+  confirmationResult: ConfirmationResult;
+  code: string;
+}) => {
+  return await confirmationResult.confirm(code);
+};
+
+export const loginWithEmail = async (
+  email: string,
+  password: string
+) => {
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
+  const token = await userCredential.user.getIdToken();
+
+  return {
+    user: userCredential.user,
+    token,
+  };
 };

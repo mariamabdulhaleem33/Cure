@@ -1,10 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { useAuthState } from "@/hooks/useAuth"
 
 export default function UnauthenticatedRoute() {
-  const { isAuthenticated } = useAuthState()
 
-  if (isAuthenticated) {
+  if (localStorage.getItem("authToken")) {
     return <Navigate to="/" replace />
   }
 

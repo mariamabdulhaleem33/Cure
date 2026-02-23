@@ -1,26 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
-import type { AxiosError } from "axios";
-import { otpFn, resendOtpFn } from "@/services/auth.service";
-import type { TSignupResponse, TErrorResponse, TServerErrorsResendOtp, Totp } from "../types/SignUpTypes";
+import { signInWithPhoneNumber, type ConfirmationResult } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
+import { useState } from "react";
 
-export const useOtp = (
-  onSuccessVerify: (data: TSignupResponse) => void,
-  onErrorVerify: (error: AxiosError<TErrorResponse>) => void,
-  onResendError: (time: number) => void
-) => {
-  const verifyOtp = useMutation<TSignupResponse, AxiosError<TErrorResponse>,Totp >({
-    mutationFn: otpFn,
-    onSuccess: onSuccessVerify,
-    onError: onErrorVerify,
-  });
+type SendOtpParams = {
+  phone: string;
+  appVerifier: any;
+};
 
-  const resendOtp = useMutation<TServerErrorsResendOtp, AxiosError<TServerErrorsResendOtp>, { mobile_number: string }>({
-    mutationFn: resendOtpFn,
-    onError: (error) => {
-      const data = error.response?.data;
-      if (data) onResendError(data.time_remaining);
+export const useOtp = () => {
+  const [confirmationResult, setConfirmationResult] =
+    useState<ConfirmationResult | null>(null);
+
+  const sendOtpMutation = useMutation({
+    mutationFn: async ({ phone, appVerifier }: SendOtpParams) => {
+      return await signInWithPhoneNumber(auth, phone, appVerifier);
+    },
+    onSuccess: (result) => {
+      setConfirmationResult(result);
     },
   });
 
-  return { verifyOtp, resendOtp };
+  return {
+    sendOtpMutation,
+    confirmationResult,
+  };
 };

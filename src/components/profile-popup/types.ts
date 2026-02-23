@@ -1,12 +1,8 @@
-export type UserProfile = {
-  name: string;
-  address: string | null;
-  avatarUrl: string | null;
-};
+import type { User } from "@/context/authContext";
+
 
 export type DropdownProps = {
-  user: UserProfile;
-  onLogout: () => void;
+  user:User ;
   onClose?: () => void;
 };
 

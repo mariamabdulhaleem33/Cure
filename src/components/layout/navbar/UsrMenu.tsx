@@ -2,24 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import DropDown from "../../profile-popup/DropDown";
 import SignInSignUpDropdown from "../../profile-popup/SignInSignUpDropdown";
 import { useMediaQuery } from "@/hooks/useMatchMediaQuery";
-import { useAuthState, useLogout } from "@/hooks/useAuth";
-import { useProfile } from "@/hooks/useProfile";
+import { useAuth } from "@/context/authContext";
 import { UserAvatar } from "@/components/ui/UserAvatar";
 
 const UserMenu: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useMediaQuery("(min-width: 768px)");
-  const { isAuthenticated } = useAuthState();
-  const logout = useLogout();
-  const { user, isLoading: isProfileLoading } = useProfile();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
-  const handleLogout = () => {
-    setShowDropdown(false);
-    logout();
-  };
+  const handleClose = () => setShowDropdown(false);
 
-  // Close dropdown when clicking outside (desktop only)
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (isLargeScreen) {
@@ -41,40 +35,23 @@ const UserMenu: React.FC = () => {
     };
   }, [showDropdown, isLargeScreen]);
 
-  const handleClose = () => {
-    setShowDropdown(false);
-  };
+  if (isLoading) return null; // أو Spinner لو حابة
 
   return (
     <>
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setShowDropdown(!showDropdown)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setShowDropdown(!showDropdown);
-            }
-          }}
-          className="
-            w-9 h-9
-            flex items-center justify-center
-            rounded-full
-            hover:bg-gray-100
-            cursor-pointer
-            transition-colors
-            overflow-hidden
-          "
+          className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 cursor-pointer transition-colors overflow-hidden"
           aria-label="Open user menu"
           aria-expanded={showDropdown}
           aria-haspopup="true"
         >
-          {isAuthenticated ? (
+          {isAuthenticated && user ? (
             <UserAvatar
-              avatarUrl={user.avatarUrl}
+              avatarUrl={user.avatarUrl || ""}
               name={user.name || "User"}
               size="sm"
-              isLoading={isProfileLoading}
               className="w-full h-full"
             />
           ) : (
@@ -84,15 +61,10 @@ const UserMenu: React.FC = () => {
           )}
         </button>
 
-        {/* Desktop Dropdown */}
         {showDropdown && (
           <div className="hidden md:block absolute right-0 top-12 z-50">
-            {isAuthenticated ? (
-              <DropDown
-                user={user}
-                onLogout={handleLogout}
-                onClose={handleClose}
-              />
+            {isAuthenticated && user ? (
+              <DropDown user={user} onClose={handleClose} />
             ) : (
               <SignInSignUpDropdown onClose={handleClose} />
             )}
@@ -104,16 +76,9 @@ const UserMenu: React.FC = () => {
       {showDropdown && (
         <div className="md:hidden fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50" onClick={handleClose} />
-          <div
-            className="relative w-full h-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {isAuthenticated ? (
-              <DropDown
-                user={user}
-                onLogout={handleLogout}
-                onClose={handleClose}
-              />
+          <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
+            {isAuthenticated && user ? (
+              <DropDown user={user} onClose={handleClose} />
             ) : (
               <SignInSignUpDropdown onClose={handleClose} />
             )}

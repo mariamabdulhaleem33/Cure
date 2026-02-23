@@ -8,27 +8,29 @@ export const editProfileSchema = z.object({
     .min(10, { message: "name must be at least 10 charcaters" })
     .max(255),
   email: z.email({ message: "please Enter Valid email" }),
-  mobile_number: z.string().regex(/^(0)?1[0-2,5][0-9]{8}$/, {
+  mobile_number: z.string().regex(/^(\+20|0)?1[0-2,5][0-9]{8}$/, {
     message: "please enter a valid number",
   }),
   location: z
     .string()
-    .regex(locationRegex, {message: "Please enter a valid Egyptian location (e.g., Cairo, Egypt)"})
+    .regex(locationRegex, {
+      message: "Please enter a valid Egyptian location (e.g., Cairo, Egypt)",
+    })
     .nullable()
     .or(z.literal(""))
     .transform((val) => {
-    if (!val) return null;
+      if (!val) return null;
 
-    const parts = val.split(",").map(part => part.trim());
-    if (parts.length !== 2) return null;
+      const parts = val.split(",").map((part) => part.trim());
+      if (parts.length !== 2) return null;
 
-    return JSON.stringify({
-      city: parts[0],
-      country: parts[1],
-    })
-  }),
+      return JSON.stringify({
+        city: parts[0],
+        country: parts[1],
+      });
+    }),
 
-    profile_photo:z.file().optional(),
+  profile_photo: z.file().optional(),
 
   birth_date: z
     .object({

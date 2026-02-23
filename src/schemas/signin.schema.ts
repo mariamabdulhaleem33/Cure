@@ -1,23 +1,12 @@
 import { z } from "zod";
 
-const passwordRegex =
-  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-
 export const signInSchema = z.object({
-  mobile_number: z
+  email: z
     .string()
-    .min(1, "Mobile number is required")
-    .regex(/^(\+20|0)?1[0-2,5][0-9]{8}$/, {
-      message: "Please enter a valid Egyptian mobile number",
-    }),
+    .min(1, "Email is required")
+    .email("Invalid email"),
 
-  password: z
-    .string()
-    .min(1, "Password is required")
-    .regex(passwordRegex, {
-      message:
-        "Password must contain uppercase, lowercase, number, and special character",
-    }),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 export type SignInFormType = z.infer<typeof signInSchema>;

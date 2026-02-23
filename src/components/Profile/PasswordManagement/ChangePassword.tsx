@@ -22,7 +22,7 @@ const ChangePassword: FC = () => {
     resolver: zodResolver(changePasswordSchema),
   });
 
-  const {mutate, isPending} = useChangePassword();
+  const {changePassword, isSaving} = useChangePassword();
 
   const inputFields = [
     {
@@ -59,7 +59,7 @@ const ChangePassword: FC = () => {
   ];
 
   const onSubmit = async (data: ChangePasswordFormData) => {
-    mutate(data);
+    changePassword(data);
   };
   return (
     <form
@@ -82,9 +82,9 @@ const ChangePassword: FC = () => {
         </div>
       ))}
       <div className="w-full  col-start-2 flex flex-col justify-end items-end">
-        <Button disabled={isPending} className="shadow-sm w-full lg:w-1/2 bg-sky-700 hover:bg-sky-800">
+        <Button disabled={isSaving} className="shadow-sm w-full lg:w-1/2 bg-sky-700 hover:bg-sky-800">
           {
-            isPending? <>Updating <Loader2 className="animate-spin"/></>:"Update"
+            isSaving? <>Updating <Loader2 className="animate-spin"/></>:"Update"
           }
         </Button>
       </div>

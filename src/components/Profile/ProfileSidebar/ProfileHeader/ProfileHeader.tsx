@@ -1,23 +1,18 @@
 import { type FC } from "react";
 import ProfileImg from "../../../ui/ProfileImage";
-import { useShowProfile } from "@/hooks/profile/useShowProfile";
 import { LocationIcon } from "@/components/profile-popup/icons";
-import { formatLocation } from "@/utils/formatLocation";
 import SidebarHeaderSkelton from "./skelton/SidebarHeaderSkelton";
+import { useAuth } from "@/context/authContext";
+import { formatLocation } from "@/utils/formatLocation";
 
 const UserProfileHeader: FC = () => {
-  const { data, isPending } = useShowProfile((data) => ({
-    name: data?.name,
-    location: formatLocation(data?.location),
-    profile_photo_url: data?.profile_photo_url,
-  }));
-
+  const { user: data } = useAuth();
   return (
  <>
-    {isPending?
+    {!data ?
       <SidebarHeaderSkelton />: <div className="flex flex-col justify-center items-center gap-6">
       <ProfileImg
-        src={data?.profile_photo_url}
+        src={data?.avatarUrl || ""}
         editable={true}
         style={`w-32 h-32`}
       />
@@ -27,7 +22,7 @@ const UserProfileHeader: FC = () => {
         </h4>
         <p className="text-neutral-500 text-sm flex items-center gap-1">
           <LocationIcon className="w-3.5 h-3.5 shrink-0" />
-          {data?.location ? data?.location : "Location not set yet"}
+          {data?.address ? formatLocation(data?.address) : "Location not set yet"}
         </p>
       </div>
     </div>
