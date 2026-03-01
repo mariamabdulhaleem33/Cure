@@ -9,7 +9,6 @@ import ReviewCard from "@/components/rating/ReviewCard";
 import Booking from "@/components/create_booking/Booking";
 import SignIn from "@/pages/signin/SignIn";
 import SignUp from "@/pages/signup/SignUp";
-import Otp from "@/pages/otp/Otp";
 import YourAppointments from "@/components/appointments-page/YourAppointments";
 import ChangePassword from "@/components/Profile/PasswordManagement/ChangePassword";
 
@@ -27,7 +26,6 @@ export default function AppRoutes() {
       <Route element={<UnauthenticatedRoute />}>
         <Route path="login" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="otp" element={<Otp />} />
       </Route>
 
       {/* Authenticated Routes */}

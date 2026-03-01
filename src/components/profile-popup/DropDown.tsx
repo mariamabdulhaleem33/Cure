@@ -14,7 +14,7 @@ import type { DropdownProps } from "./types";
 import styles from "./DropDown.module.css";
 import { CLOSE_BUTTON, ICON_SIZES, TYPOGRAPHY } from "./constants";
 import { formatLocation } from "@/utils/formatLocation";
-import { useLogout } from "@/hooks/useLogout";
+import { useLogout } from "@/hooks/auth/useLogout";
 
 const SettingsHeaderIcon = ({
   className = "w-6 h-6",

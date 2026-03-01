@@ -6,8 +6,6 @@ import {
   type ReactNode,
 } from "react";
 
-/* ================== Types ================== */
-
 export interface User {
   name: string;
   email: string;
@@ -26,11 +24,8 @@ interface AuthContextType {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
-/* ================== Context ================== */
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-/* ================== Provider ================== */
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -88,7 +83,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-/* ================== Hook ================== */
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

@@ -1,12 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom"
-import { useAuthState } from "@/hooks/useAuth"
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function AuthenticatedRoute() {
-  const { isAuthenticated } = useAuthState()
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />
+  if (!localStorage.getItem("authToken")) {
+    return <Navigate to="/login" replace />;
   }
 
-  return <Outlet />
+  return <Outlet />;
 }

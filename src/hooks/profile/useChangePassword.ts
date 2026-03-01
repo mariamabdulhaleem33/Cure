@@ -7,7 +7,7 @@ import {
   reauthenticateWithCredential,
   updatePassword,
 } from "firebase/auth";
-import { useLogout } from "../useLogout";
+import { useLogout } from "../auth/useLogout";
 
 export const useChangePassword = () => {
   const { user } = useAuth();

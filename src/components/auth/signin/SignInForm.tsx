@@ -7,7 +7,7 @@ import {
   signInSchema,
   type SignInFormType,
 } from "@/schemas/signin.schema";
-import { useLogin } from "@/hooks/useLogin";
+import { useLogin } from "@/hooks/auth/useLogin";
 
 export default function SignInForm() {
   const {

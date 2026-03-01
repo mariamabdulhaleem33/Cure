@@ -26,7 +26,6 @@ export const useUserLocation = () => {
       (err) => {
         setGeoError("User denied accessing his own location")
         setIsLoadingLocation(false)
-        // setCoords({ lat: 31.2352, lng: 30.0434 })
       }
     )
   }, [])
